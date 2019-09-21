@@ -12,10 +12,11 @@ import './style.css'
 export default class PhotoComponent extends Component {
   render() {
     return (
-      <div>
-        Title:  {this.props.title}
-        <button className="btn btn-primary">Compare</button>
-        <Button > dsaad</Button> 
+      <div className="card card-primary mb-4">
+        <div className="mb-2"> Title:  {this.props.title}</div>
+        <div>  
+        <button className="btn btn-primary text-center compare-btn">Compare</button>
+        </div>
       </div>
     );
   }

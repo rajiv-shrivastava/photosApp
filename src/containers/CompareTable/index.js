@@ -3,24 +3,19 @@ import PhotoComponent from "../../components/PhotoComponent";
 import { connect } from "react-redux";
 import { fetchPhotos} from "../../actions/actionMain";
 import './style.css'
-import CompareTable from "../CompareTable";
 
-
-class MainPage extends React.Component {
+class CompareTable extends React.Component {
   constructor() {
     super();
   }
-  componentDidMount() {
-    this.props.fetchPhotos()
-  }
 
   renderData = () => {
-    const photos = this.props.photos.map(photo =>{
+    const photos = this.props.photos.map((photo,i) =>{
       return(<div className="col-sm-3" key={photo.id}>
           <PhotoComponent title={photo.title} /> 
          </div>);
      })
-     return photos.slice(0,9);
+     return photos;
   }
 
 
@@ -30,15 +25,14 @@ class MainPage extends React.Component {
 
     return (
           <div  className="container-fluid">
-            <div className="row">
-            {this.renderData()}
-            </div>
-            <CompareTable />
+
+            I am compare table
           </div>      
     )
 
   }
 }
+
 
 const mapStateToProps = (state) => {
   return {
@@ -51,7 +45,7 @@ const mapStateToProps = (state) => {
 export default connect(
   mapStateToProps,
   { fetchPhotos }
-)(MainPage);
+)(CompareTable);
 
 
 

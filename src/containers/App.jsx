@@ -5,17 +5,13 @@
 
 */
 import React, { Component, PropTypes } from "react";
-import WelcomePage from "../components/welcomePage";
-import { Row, Col, Jumbotron, Button } from "react-bootstrap";
+import MainPage from "./MainPage";
+
+
 export default class App extends Component {
   render() {
-    const { questions } = this.props;
     return (
-      <Row>
-        <Col xs={6} md={12}>
-          <Jumbotron>{this.props.children}</Jumbotron>
-        </Col>
-      </Row>
+      <MainPage />
     );
   }
 }

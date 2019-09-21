@@ -1,41 +1,16 @@
 /*  
   actionMain.js
 
-  Collection of all sample actions in the app
+  Collection of all async actions in the app
 
 */
 
 import axios from "./axios";
-import { FETCH_SAMPLE_DATA,SIMPLE_POST_ACTION } from "./actionTypes";
+import { FETCH_PHOTOS } from "./actionTypes";
 
-export function fetchData() {
+export function fetchPhotos() {
   return {
-    type: FETCH_SAMPLE_DATA,
-    payload: axios.get("users")
+    type: FETCH_PHOTOS,
+    payload: axios.get("photos")
   };
 }
-
-export function simlePostCall(data) {
-
-  return {
-    type: SIMPLE_POST_ACTION,
-    payload: axios.post("/posts",data)
-  };
-}
-
-
-// export function simlePutCall(response) {
-// let data = {someparam1: "param1value",someparam2: "someparam2value"}
-//   return {
-//     type: SIMPLE_POST_ACTION,
-//     payload: axios.put("users",data)
-//   };
-// }
-
-
-// export function simleReducAction(response) {
-//   return {
-//     type: SIMPLE_REDUX_aCTION,
-//     payload: response
-//   };
-// }

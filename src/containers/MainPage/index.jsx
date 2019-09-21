@@ -1,7 +1,7 @@
 import React from "react";
 import PhotoComponent from "../../components/PhotoComponent";
 import { connect } from "react-redux";
-import { fetchPhotos} from "../../actions/actionMain";
+import { fetchPhotos,comparePhoto} from "../../actions/actionMain";
 import './style.css'
 import CompareTable from "../CompareTable";
 
@@ -14,10 +14,16 @@ class MainPage extends React.Component {
     this.props.fetchPhotos()
   }
 
+  comparePhoto = (id) => {
+    let photo = this.props.photos.find((photo) => {return id == photo.id })
+    this.props.comparePhoto(photo)
+
+  }
+
   renderData = () => {
     const photos = this.props.photos.map(photo =>{
       return(<div className="col-sm-3" key={photo.id}>
-          <PhotoComponent title={photo.title} /> 
+          <PhotoComponent {...photo} comparePhoto={this.comparePhoto} /> 
          </div>);
      })
      return photos.slice(0,9);
@@ -50,7 +56,7 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { fetchPhotos }
+  { fetchPhotos,comparePhoto }
 )(MainPage);
 
 

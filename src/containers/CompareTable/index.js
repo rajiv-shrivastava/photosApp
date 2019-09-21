@@ -1,7 +1,7 @@
 import React from "react";
 import PhotoComponent from "../../components/PhotoComponent";
 import { connect } from "react-redux";
-import { fetchPhotos} from "../../actions/actionMain";
+import { removePhoto } from "../../actions/actionMain";
 import './style.css'
 
 class CompareTable extends React.Component {
@@ -10,10 +10,17 @@ class CompareTable extends React.Component {
   }
 
   renderData = () => {
-    const photos = this.props.photos.map((photo,i) =>{
-      return(<div className="col-sm-3" key={photo.id}>
-          <PhotoComponent title={photo.title} /> 
-         </div>);
+    const photos = this.props.comparePhotos.map((photo,i) =>{
+      return(<tr key={photo.id}>
+               <td> {photo.title} </td>
+               <td> {photo.url} </td>
+               <td> 
+                 <button 
+                 className="btn btn-danger" 
+                 onClick={() => this.props.removePhoto(photo.id)}> 
+                 REMOVE</button> 
+                  </td>
+         </tr>);
      })
      return photos;
   }
@@ -24,9 +31,18 @@ class CompareTable extends React.Component {
   render() {
 
     return (
-          <div  className="container-fluid">
+          <div  className="container-fluid mb-4">
+            CompareTable
 
-            I am compare table
+             <table className="table">
+               <thead>
+                <td> Title</td>
+                <td> URL</td> 
+               </thead>
+               <tbody>
+               {this.renderData()}
+               </tbody>
+              </table>
           </div>      
     )
 
@@ -36,15 +52,13 @@ class CompareTable extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    photos: state.photosReducer.photos || [],
-    photosLoading: state.photosReducer.photosLoading || false,
-    photosError: state.photosReducer.photosError || ''
+    comparePhotos: state.compareReducer.comparePhotos || []
   };
 }
 
 export default connect(
   mapStateToProps,
-  { fetchPhotos }
+  { removePhoto }
 )(CompareTable);
 
 
